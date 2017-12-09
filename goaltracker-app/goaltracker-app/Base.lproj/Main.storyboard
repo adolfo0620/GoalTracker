@@ -22,7 +22,7 @@
         <!--GoalsVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GoalsVC" customModule="goaltracker_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoalVC" id="BYZ-38-t0r" customClass="GoalsVC" customModule="goaltracker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,7 +186,7 @@
         <!--Create GoalVC-->
         <scene sceneID="IWW-WQ-fle">
             <objects>
-                <viewController id="E6s-EU-2X7" customClass="CreateGoalVC" customModule="goaltracker_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateGoalVC" id="E6s-EU-2X7" customClass="CreateGoalVC" customModule="goaltracker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pcF-ye-19D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,9 +306,9 @@
                         <viewLayoutGuide key="safeArea" id="UCe-0I-aPp"/>
                     </view>
                     <connections>
-                        <outlet property="bextBtn" destination="UmY-Aq-A0c" id="pnH-Q9-MKK"/>
                         <outlet property="goalTextVIew" destination="y0W-hz-S6g" id="uvM-v4-1Mq"/>
-                        <outlet property="lognTermBtn" destination="Q1f-r0-wmq" id="d3c-BT-0as"/>
+                        <outlet property="longTermBtn" destination="Q1f-r0-wmq" id="n9x-IE-gzV"/>
+                        <outlet property="nextBtn" destination="UmY-Aq-A0c" id="iOw-tV-W9l"/>
                         <outlet property="shortTermBtn" destination="aTD-Nu-sKY" id="RIU-uJ-TUo"/>
                     </connections>
                 </viewController>
