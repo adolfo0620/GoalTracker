@@ -44,6 +44,7 @@ class CreateGoalVC: UIViewController, UITextViewDelegate {
     @IBAction func backBtnWasPressed(_ sender: Any) {
         dismissDetail()
     }
+    
     @IBAction func nextBtnWasPressed(_ sender: Any) {
         if goalTextVIew.text != "" && goalTextVIew.text != "what is your goal?"{
             guard let finishGoalVC = storyboard?.instantiateViewController(withIdentifier: "FinishGoalVC") as? FinishGoalVC else { return }
@@ -57,4 +58,6 @@ class CreateGoalVC: UIViewController, UITextViewDelegate {
         goalTextVIew.text = ""
         goalTextVIew.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
+    
+    
 }
