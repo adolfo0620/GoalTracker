@@ -13,7 +13,8 @@ class FinishGoalVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var createGoalBtn: UIButton!
     var goalDescription: String!
-    var goalType: GoalType!
+    var goalDesc: String!
+    var goalType: GoalType?
     @IBOutlet weak var pointsTextView: UITextField!
     
     override func viewDidLoad() {
@@ -22,9 +23,10 @@ class FinishGoalVC: UIViewController, UITextFieldDelegate {
         pointsTextView.delegate = self
     }
     
-    func initData(descrition: String, type: GoalType){
+    func initData(description: String, type: GoalType){
         self.goalDescription = description
         self.goalType = type
+        
     }
     
     @IBAction func backBtnWasPressed(_ sender: Any) {
@@ -33,7 +35,7 @@ class FinishGoalVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func createGoalBtnWasPressed(_ sender: Any) {
         if pointsTextView.text != "" {
-            self.save { (complete) in
+            self.save{ (complete) in
                 if complete {
                     self.presentingViewController!.presentingViewController?.dismissDetail()
                 }
@@ -44,15 +46,14 @@ class FinishGoalVC: UIViewController, UITextFieldDelegate {
     func save(completion: (_ finished: Bool) -> ()){
         guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
         let goal = Goal(context: managedContext)
-        
-        goal.goalDescription = goalDescription
-        goal.goalType = goalType.rawValue
+        goal.goalDescription = goalDescription!
+        goal.goalType = goalType!.rawValue
         goal.goalCompletionValue = Int32(pointsTextView.text!)!
         goal.goalProgress = Int32(0)
+        
         do{
             try managedContext.save()
             completion(true)
-            print("it worked!!!!")
         } catch {
             debugPrint("Could not save: \(error.localizedDescription)")
             completion(false)
