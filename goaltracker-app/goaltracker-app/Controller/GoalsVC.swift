@@ -30,7 +30,7 @@ class GoalsVC: UIViewController {
     func fetchCoreDataObjects(){
         self.fetch { (complete) in
             if complete{
-                if goals.count > 1{
+                if goals.count >= 1{
                     tableView.isHidden = false
                 } else{
                     tableView.isHidden = true
@@ -73,13 +73,32 @@ extension GoalsVC: UITableViewDelegate, UITableViewDataSource{
             self.fetchCoreDataObjects()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        let addAction = UITableViewRowAction(style: .normal, title: "ADD 1") { (rowAction, indexPath) in
+            self.setProgess(atIndexPath: indexPath)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         deleteAction.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-        return [deleteAction]
+        addAction.backgroundColor = #colorLiteral(red: 1, green: 0.7426839363, blue: 0.3095963934, alpha: 1)
+        return [deleteAction, addAction]
     }
     
 }
 
 extension GoalsVC {
+    func setProgess(atIndexPath indexPath: IndexPath){
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        let chosenGoal = goals[indexPath.row]
+        if chosenGoal.goalProgress < chosenGoal.goalCompletionValue{
+            chosenGoal.goalProgress += 1
+        }else{ return }
+        
+        do{
+            try managedContext.save()
+        }catch{
+            debugPrint("Could not set Progress: \(error.localizedDescription)")
+        }
+    }
+    
     func fetch(completion: (_ complete: Bool)->()){
         guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
